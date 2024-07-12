@@ -37,25 +37,6 @@ class PagesController extends Controller
         $paginatedItems->setPath($request->url());
 
 
-        // User
-        $accessToken = session()->get('access_token');
-        $user = '';
-
-        if ($accessToken) {
-            
-            $url_api = $api_sv . '/api/v1/candidates/profile';
-    
-            $response_user = Http::withHeaders([
-                'Authorization' => $accessToken,
-            ])->get($url_api);
-    
-            $result_user = json_decode($response_user->body());
-    
-            $user = $result_user->data;
-        }
-
-
-
-        return view('pages.home', compact('paginatedItems', 'user'));
+        return view('pages.home', compact('paginatedItems'));
     }
 }

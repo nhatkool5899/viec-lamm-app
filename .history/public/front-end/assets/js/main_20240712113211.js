@@ -120,7 +120,7 @@ $(document).ready(function() {
                 if(data == 'success') {
                     location.reload()
                 }else{
-                    console.log(data.message);
+                    console.log('Server đang bảo trì, thử lại sau !');
                 }
             },
             error: function(xhr, status, error) {

@@ -49,52 +49,15 @@
                         </ul>
                     </div>
                     <div class="header__right">
-                        @if ($user != '')
-                            
-                        <div class="navbar__user">
-                            <div class="navbar__user-item line">
-                                <div class="block-for-employer">
-                                    <p>Bạn là nhà tuyển dụng</p>
-                                    <a href="#dang-tuyen">
-                                        <span>Đăng tuyển ngay</span>
-                                        <i class='bx bx-chevrons-right'></i>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="navbar__user-item">
-                                <div class="group__icon">
-                                    <span class="icon__item">
-                                        <i class='bx bxs-bell' ></i>
-                                    </span>
-                                    <span class="icon__item">
-                                        <i class='bx bxs-chat' ></i>
-                                    </span>
-                                </div>
-                                <div class="group__user">
-                                    <div class="group__user-head">
-                                        <div class="user__avt">
-                                            <img src="{{asset('front-end/assets/imgs/avatar-default.jpg')}}" alt="avatar-default">
-                                        </div>
-                                        <div class="user__arrow">
-                                            <i class='bx bx-chevron-down' ></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        @else
-
                         <div class="button__primary redirect-signin">
                             Đăng nhập
                         </div>
                         <div class="button__primary default redirect-signup">
                             Đăng ký
                         </div>
-                        <a href="{{url('dang-nhap')}}" class="button__primary black">
+                        <div class="button__primary black">
                             Dành cho nhà tuyển dụng
-                        </a>
-                        @endif
+                        </div>
                     </div>
                 </div>
             </div>
@@ -119,18 +82,40 @@
                         Đăng nhập
                     </span>
                 </div>
-                <form id="login-form">
+                <form method="post">
                     @csrf
                     <div class="group-login">
-                        <input type="email" name="email" class="input-login login-email" placeholder="&nbsp;" autocomplete="off">
+                        <input type="email" name="email" class="input-login input-phone" placeholder="&nbsp;" autocomplete="off">
                         <span class="input-text">Email</span>
                     </div>
                     <div class="group-login">
-                        <input type="password" name="password" class="input-login login-password" placeholder="&nbsp;">
+                        <input type="password" name="password" class="input-login input-password" placeholder="&nbsp;">
                         <span class="input-text">Mật khẩu</span>
                     </div>
                     <div class="group-login">
-                        <button type="submit" class="submit-login confirm-login">Đăng nhập ứng viên</button>
+                        <label class="group-label" for="input-checkbox">
+                            <input type="checkbox" name="remember" id="input-checkbox">
+                            <span>Ghi nhớ</span>
+                        </label>
+                    </div>
+                    <div class="group-login">
+                        <button type="submit" class="submit-login confirm-login">Đăng nhập</button>
+                    </div>
+                    <div class="line-register">
+                        <span>Hoặc</span>
+                    </div>
+                    <div class="group-login" style="margin: 50px 0px 30px">
+                        <span class="submit-login confirm-login register-btn redirect-signup">Đăng ký ngay</span>
+                    </div>
+                    <div class="group-flex" style="margin-top: 30px">
+                        <div class="group-login group-images-register">
+                            <img class="images-icon" src="{{asset('front-end/assets/imgs/fb-icon.webp')}}" alt="facebook-icon">
+                            <span>Facebook</span>
+                        </div>
+                        <div class="group-login group-images-register">
+                            <img class="images-icon" src="{{asset('front-end/assets/imgs/gg-icon.webp')}}" alt="google-icon">
+                            <span>Google</span>
+                        </div>
                     </div>
                 </form>
             </div>
@@ -143,66 +128,45 @@
                         Đăng ký
                     </span>
                 </div>
-                <form id="register-form">
+                <form>
                     @csrf
-                    <div class="group-flex">
-                        <div class="group-login">
-                            <input type="email" name="email" class="input-login register-email" placeholder="&nbsp;">
-                            <span class="input-text">Email đăng nhập</span>
-                        </div>
-                    </div>
-                    <div class="group-flex">
-                        <div class="group-login">
-                            <input type="password" name="password" class="input-login register-password" placeholder="&nbsp;">
-                            <span class="input-text">Mật khẩu</span>
-                        </div>
-                    </div>
-                    <div class="group-flex">
-                        <div class="group-login">
-                            <input type="password" name="confirm-password" class="input-login confirm-password" placeholder="&nbsp;">
-                            <span class="input-text">Nhập lại mật khẩu</span>
-                        </div>
-                    </div>
                     <div class="group-flex">
                         <div class="group-login">
                             <input type="text" name="name" class="input-login register-name" placeholder="&nbsp;">
                             <span class="input-text">Họ tên</span>
                         </div>
                         <div class="group-login">
-                            <input type="number" name="phone" class="input-login register-phone" placeholder="&nbsp;">
+                            <input type="text" name="phone" class="input-login register-phone" placeholder="&nbsp;">
                             <span class="input-text">Số điện thoại</span>
                         </div>
                     </div>
                     <div class="group-flex">
-                        <div class="group-login" style="gap: 20px">
-                            <span>Giới tính:</span>
-                            <label style="display: flex;gap:6px" for="male">
-                                <span style="font-size: 14px; font-weight:300">Nam</span>
-                                <input type="radio" name="gender" value="1" id="male">
-                            </label>
-                            <label style="display: flex;gap:6px" for="female">
-                                <span style="font-size: 14px; font-weight:300">Nữ</span>
-                                <input type="radio" name="gender" value="2" id="female">
-                            </label>
-                            <label style="display: flex;gap:6px" for="other">
-                                <span style="font-size: 14px; font-weight:300">Khác</span>
-                                <input type="radio" name="gender" value="3" id="other">
-                            </label>
-                        </div>
-                    </div>
-                    <div class="group-flex">
                         <div class="group-login">
-                            <input type="date" name="birthday" class="input-login register-birthday" placeholder="&nbsp;">
-                            <span class="input-text">Ngày sinh</span>
+                            <input type="email" name="email" class="input-login register-email" placeholder="&nbsp;">
+                            <span class="input-text">Email</span>
                         </div>
                         <div class="group-login">
-                            <input type="text" name="address" class="input-login register-address" placeholder="&nbsp;">
-                            <span class="input-text">Địa chỉ</span>
+                            <input type="password" name="password" class="input-login register-password" placeholder="&nbsp;">
+                            <span class="input-text">Mật khẩu</span>
                         </div>
                     </div>
                     <div class="group-login">
-                        <button type="submit" class="submit-login submit-register confirm-register">Đăng ký ứng viên</button>
+                        <button type="submit" class="submit-login submit-register confirm-register">Đăng ký</button>
                     </div>
+                    <div class="line-register">
+                        <span>Hoặc</span>
+                    </div>
+                    <div class="group-flex" style="margin-top: 30px">
+                        <div class="group-login group-images-register">
+                            <img class="images-icon" src="{{asset('front-end/assets/imgs/fb-icon.webp')}}" alt="facebook-icon">
+                            <span>Facebook</span>
+                        </div>
+                        <div class="group-login group-images-register">
+                            <img class="images-icon" src="{{asset('front-end/assets/imgs/gg-icon.webp')}}" alt="google-icon">
+                            <span>Google</span>
+                        </div>
+                    </div>
+
                 </form>
             </div>
         </div>

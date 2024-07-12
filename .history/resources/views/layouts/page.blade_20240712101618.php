@@ -49,42 +49,6 @@
                         </ul>
                     </div>
                     <div class="header__right">
-                        @if ($user != '')
-                            
-                        <div class="navbar__user">
-                            <div class="navbar__user-item line">
-                                <div class="block-for-employer">
-                                    <p>Bạn là nhà tuyển dụng</p>
-                                    <a href="#dang-tuyen">
-                                        <span>Đăng tuyển ngay</span>
-                                        <i class='bx bx-chevrons-right'></i>
-                                    </a>
-                                </div>
-                            </div>
-                            <div class="navbar__user-item">
-                                <div class="group__icon">
-                                    <span class="icon__item">
-                                        <i class='bx bxs-bell' ></i>
-                                    </span>
-                                    <span class="icon__item">
-                                        <i class='bx bxs-chat' ></i>
-                                    </span>
-                                </div>
-                                <div class="group__user">
-                                    <div class="group__user-head">
-                                        <div class="user__avt">
-                                            <img src="{{asset('front-end/assets/imgs/avatar-default.jpg')}}" alt="avatar-default">
-                                        </div>
-                                        <div class="user__arrow">
-                                            <i class='bx bx-chevron-down' ></i>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        @else
-
                         <div class="button__primary redirect-signin">
                             Đăng nhập
                         </div>
@@ -94,7 +58,6 @@
                         <a href="{{url('dang-nhap')}}" class="button__primary black">
                             Dành cho nhà tuyển dụng
                         </a>
-                        @endif
                     </div>
                 </div>
             </div>
@@ -119,14 +82,14 @@
                         Đăng nhập
                     </span>
                 </div>
-                <form id="login-form">
+                <form method="post">
                     @csrf
                     <div class="group-login">
-                        <input type="email" name="email" class="input-login login-email" placeholder="&nbsp;" autocomplete="off">
+                        <input type="email" name="email" class="input-login input-phone" placeholder="&nbsp;" autocomplete="off">
                         <span class="input-text">Email</span>
                     </div>
                     <div class="group-login">
-                        <input type="password" name="password" class="input-login login-password" placeholder="&nbsp;">
+                        <input type="password" name="password" class="input-login input-password" placeholder="&nbsp;">
                         <span class="input-text">Mật khẩu</span>
                     </div>
                     <div class="group-login">

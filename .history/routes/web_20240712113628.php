@@ -18,4 +18,4 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [PagesController::class, 'index']);
 
 Route::post('/dang-nhap', [AccountController::class, 'login']);
-Route::get('/login', [AccountController::class, 'login']);
+Route::get('/dang-nhap', [AccountController::class, 'login']);

@@ -1495,24 +1495,12 @@
     justify-content: center;
     border-radius: 50%;
     color: var(--primary-color);
-    background-color: rgb(119 184 254 / 12%);
+    background-color: rgb(119 184 254 / 20%);
 }
 .navbar__user-item{
     display: flex;
     align-items: center;
-    gap: 10px;
-    position: relative;   
-}
-
-.navbar__user-item.line::after{
-    content: "";
-    position: absolute;
-    top: 50%;
-    right: -15px;
-    width: 1px;
-    height: 30px;
-    background-color: #e5e5e5;
-    transform: translateY(-50%);
+    gap: 10px;   
 }
 
 .group__user{

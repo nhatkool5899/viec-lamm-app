@@ -49,10 +49,10 @@
                         </ul>
                     </div>
                     <div class="header__right">
-                        @if ($user != '')
+                        @if (session()->get('user'))
                             
                         <div class="navbar__user">
-                            <div class="navbar__user-item line">
+                            <div class="navbar__user-item">
                                 <div class="block-for-employer">
                                     <p>Bạn là nhà tuyển dụng</p>
                                     <a href="#dang-tuyen">

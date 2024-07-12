@@ -103,34 +103,7 @@ $('.modal-register').click(function(e){
 // Signup account
 
 $(document).ready(function() {
-    $('#login-form').on('submit', function(e) {
-        e.preventDefault();
-
-        var email = $('.login-email').val();
-        var password = $('.login-password').val();
     
-        var _token = $('input[name="_token"]').val();
-    
-        $.ajax({
-            url: '/dang-nhap',
-            method: 'POST',
-            data:{email:email, password:password, _token:_token},
-            success: function(data) {
-    
-                if(data == 'success') {
-                    location.reload()
-                }else{
-                    console.log(data.message);
-                }
-            },
-            error: function(xhr, status, error) {
-                var errorMessage = xhr.responseJSON ? xhr.responseJSON.message : 'Đăng nhập thất bại!';
-                alert(errorMessage);
-            }
-        });
-    });
-
-
     $('#register-form').on('submit', function(e) {
         e.preventDefault();
 

@@ -1508,7 +1508,7 @@
     content: "";
     position: absolute;
     top: 50%;
-    right: -15px;
+    left: 15px;
     width: 1px;
     height: 30px;
     background-color: #e5e5e5;

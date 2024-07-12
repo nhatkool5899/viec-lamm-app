@@ -103,41 +103,13 @@ $('.modal-register').click(function(e){
 // Signup account
 
 $(document).ready(function() {
-    $('#login-form').on('submit', function(e) {
-        e.preventDefault();
-
-        var email = $('.login-email').val();
-        var password = $('.login-password').val();
-    
-        var _token = $('input[name="_token"]').val();
-    
-        $.ajax({
-            url: '/dang-nhap',
-            method: 'POST',
-            data:{email:email, password:password, _token:_token},
-            success: function(data) {
-    
-                if(data == 'success') {
-                    location.reload()
-                }else{
-                    console.log(data.message);
-                }
-            },
-            error: function(xhr, status, error) {
-                var errorMessage = xhr.responseJSON ? xhr.responseJSON.message : 'Đăng nhập thất bại!';
-                alert(errorMessage);
-            }
-        });
-    });
-
-
     $('#register-form').on('submit', function(e) {
         e.preventDefault();
 
         var formData = {
             email: $('.register-email').val(),
-            password1: $('.register-password').val(),
-            password2: $('.confirm-password').val(),
+            password: $('.register-password').val(),
+            confirm_password: $('.confirm-password').val(),
             name: $('.register-name').val(),
             phone: $('.register-phone').val(),
             gender: $('input[name="gender"]:checked').val(),
@@ -155,12 +127,10 @@ $(document).ready(function() {
             },
             error: function(xhr, status, error) {
                 var errorMessage = xhr.responseJSON ? xhr.responseJSON.message : 'Đăng ký thất bại!';
-                alert(errorMessage);
+                $('#message').text(errorMessage).css('color', 'red').show();
             }
         });
     });
-
-
 });
 
 

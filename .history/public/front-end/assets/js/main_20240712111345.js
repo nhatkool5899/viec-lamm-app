@@ -106,25 +106,27 @@ $(document).ready(function() {
     $('#login-form').on('submit', function(e) {
         e.preventDefault();
 
-        var email = $('.login-email').val();
-        var password = $('.login-password').val();
-    
-        var _token = $('input[name="_token"]').val();
-    
+        var formData = {
+            email: $('.register-email').val(),
+            password1: $('.register-password').val(),
+            password2: $('.confirm-password').val(),
+            name: $('.register-name').val(),
+            phone: $('.register-phone').val(),
+            gender: $('input[name="gender"]:checked').val(),
+            birthday: $('.register-birthday').val(),
+            address: $('.register-address').val(),
+        };
+
         $.ajax({
-            url: '/dang-nhap',
-            method: 'POST',
-            data:{email:email, password:password, _token:_token},
-            success: function(data) {
-    
-                if(data == 'success') {
-                    location.reload()
-                }else{
-                    console.log(data.message);
-                }
+            url: 'http://45.90.220.144:1403/api/v1/auth/register/candidate',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(formData),
+            success: function(response) {
+                alert('ok')
             },
             error: function(xhr, status, error) {
-                var errorMessage = xhr.responseJSON ? xhr.responseJSON.message : 'Đăng nhập thất bại!';
+                var errorMessage = xhr.responseJSON ? xhr.responseJSON.message : 'Đăng ký thất bại!';
                 alert(errorMessage);
             }
         });

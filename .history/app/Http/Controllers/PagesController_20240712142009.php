@@ -51,7 +51,7 @@ class PagesController extends Controller
     
             $result_user = json_decode($response_user->body());
     
-            $user = $result_user->data;
+            dd($result_user->data);
         }
 
 

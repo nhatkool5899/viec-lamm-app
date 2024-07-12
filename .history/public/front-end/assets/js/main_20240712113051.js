@@ -106,26 +106,38 @@ $(document).ready(function() {
     $('#login-form').on('submit', function(e) {
         e.preventDefault();
 
+        var formData = {
+            email: $('.login-email').val(),
+            password: $('.login-password').val()
+        };
+
         var email = $('.login-email').val();
         var password = $('.login-password').val();
     
         var _token = $('input[name="_token"]').val();
     
         $.ajax({
-            url: '/dang-nhap',
+            url: '/repurchase',
             method: 'POST',
-            data:{email:email, password:password, _token:_token},
+            data:{order_id:order_id, access_token:access_token, _token:_token},
             success: function(data) {
     
                 if(data == 'success') {
-                    location.reload()
+                    swal({
+                        title: "Đã thêm lại sản phẩm vào giỏ hàng",
+                        showCancelButton: true,
+                        cancelButtonText: "Xem tiếp",
+                        confirmButtonClass: "btn-success",
+                        confirmButtonText: "Đến giỏ hàng",
+                        closeOnConfirm: false
+                    },
+                    function() {
+                        window.location.href = '/gio-hang';
+                    });
                 }else{
-                    console.log(data.message);
+                    console.log('Server đang bảo trì, thử lại sau !');
                 }
-            },
-            error: function(xhr, status, error) {
-                var errorMessage = xhr.responseJSON ? xhr.responseJSON.message : 'Đăng nhập thất bại!';
-                alert(errorMessage);
+                
             }
         });
     });

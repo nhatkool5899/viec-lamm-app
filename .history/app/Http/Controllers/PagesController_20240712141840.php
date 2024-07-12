@@ -49,9 +49,9 @@ class PagesController extends Controller
                 'Authorization' => $accessToken,
             ])->get($url_api);
     
-            $result_user = json_decode($response_user->body());
+            $result_user = json_decode($response->body());
     
-            $user = $result_user->data;
+            dd($result_user);
         }
 
 
