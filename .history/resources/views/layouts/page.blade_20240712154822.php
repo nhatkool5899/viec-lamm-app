@@ -89,7 +89,7 @@
                                                 </div>
                                             </div>
                                             <li class="user__menu-item">
-                                                <a href="{{url('thong-tin-ca-nhan')}}" class="user__menu-link">
+                                                <a href="#" class="user__menu-link">
                                                     <i class='bx bx-edit-alt'></i>
                                                     <span>Thông tin cá nhân</span>
                                                 </a>
@@ -102,27 +102,21 @@
                                             </li>
                                             <li class="user__menu-item">
                                                 <a href="#" class="user__menu-link">
-                                                    <i class='bx bx-bookmark-alt-plus'></i>
+                                                    <i class='bx bx-edit-alt'></i>
                                                     <span>Việc làm đã nộp</span>
                                                 </a>
                                             </li>
                                             <li class="user__menu-item">
                                                 <a href="#" class="user__menu-link">
-                                                    <i class='bx bx-heart' ></i>
+                                                    <i class='bx bx-edit-alt'></i>
                                                     <span>Việc làm đã lưu</span>
                                                 </a>
                                             </li>
                                             <div class="menu__line"></div>
                                             <li class="user__menu-item">
                                                 <a href="#" class="user__menu-link">
-                                                    <i class='bx bx-lock-alt' ></i>
-                                                    <span>Đổi mật khẩu</span>
-                                                </a>
-                                            </li>
-                                            <li class="user__menu-item">
-                                                <a href="#" class="user__menu-link">
-                                                    <i class='bx bx-log-out-circle' ></i>
-                                                    <span style="font-weight:600">Đăng xuất</span>
+                                                    <i class='bx bx-edit-alt'></i>
+                                                    <span>Đăng xuất</span>
                                                 </a>
                                             </li>
                                         </ul>

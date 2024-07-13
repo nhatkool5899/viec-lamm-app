@@ -115,7 +115,7 @@
                                             <div class="menu__line"></div>
                                             <li class="user__menu-item">
                                                 <a href="#" class="user__menu-link">
-                                                    <i class='bx bx-lock-alt' ></i>
+                                                    <i class='bx bx-log-out-circle' ></i>
                                                     <span>Đổi mật khẩu</span>
                                                 </a>
                                             </li>

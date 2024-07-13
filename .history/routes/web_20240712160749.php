@@ -17,7 +17,6 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [PagesController::class, 'index']);
 Route::get('/thong-tin-ca-nhan', [PagesController::class, 'profile']);
-Route::get('/viec-lam/{slug}', [PagesController::class, 'job_details']);
 
 Route::post('/dang-nhap', [AccountController::class, 'login']);
 Route::get('/login', [AccountController::class, 'login']);

@@ -84,30 +84,4 @@ class PagesController extends Controller
 
         return view('pages.profile', compact('user'));
     }
-
-    public function job_details(Request $request){
-
-        $api_sv = "http://45.90.220.144:1403";
-
-        // User
-        $accessToken = session()->get('access_token');
-        $user = '';
-
-        if ($accessToken) {
-            
-            $url_api = $api_sv . '/api/v1/candidates/profile';
-    
-            $response_user = Http::withHeaders([
-                'Authorization' => $accessToken,
-            ])->get($url_api);
-    
-            $result_user = json_decode($response_user->body());
-    
-            $user = $result_user->data;
-        }
-
-
-
-        return view('pages.job-details', compact('user'));
-    }
 }

@@ -2000,9 +2000,3 @@
     height: 2px;
     background: var(--primary-color);
 }
-
-.jobs__details-content ul{
-    list-style: disc;
-    line-height: 2.5;
-    padding-left: 20px;
-}
