@@ -1,0 +1,281 @@
+$('.select-location').customSelect({
+  search: true
+});
+
+$('.select__jobs').customSelect({
+  includeValue: true
+});
+
+$('.filter__select').customSelect({
+  includeValue: true
+});
+
+
+$('.slider__banner').slick({
+  dots: true,
+  arrows: false,
+  infinite: true,
+  autoplay: true,
+  speed: 500,
+  fade: true,
+  cssEase: 'linear',
+});
+
+// Chart.js
+
+// Custom plugin to only draw the top border of bars
+const topBorderPlugin = {
+    id: 'topBorderPlugin',
+    afterDatasetsDraw: function(chart) {
+        const ctx = chart.ctx;
+        chart.data.datasets.forEach((dataset, i) => {
+            const meta = chart.getDatasetMeta(i);
+            if (!meta.hidden) {
+                meta.data.forEach((element, index) => {
+                    const { x, y, width, height } = element;
+
+                    ctx.save();
+                    ctx.strokeStyle = dataset.borderColor[index];
+                    ctx.lineWidth = dataset.borderWidth;
+
+                    // Clear other borders
+                    ctx.clearRect(x - width / 2, y, width, height);
+
+                    // Draw the top border
+                    ctx.beginPath();
+                    ctx.moveTo(x - width / 2, y);
+                    ctx.lineTo(x + width / 2, y);
+                    ctx.stroke();
+
+                    ctx.restore();
+                });
+            }
+        });
+    }
+};
+
+// Custom plugin to draw legend below the chart
+const legendBelowPlugin = {
+    id: 'legendBelowPlugin',
+    afterDraw: function(chart) {
+        const ctx = chart.ctx;
+        const chartArea = chart.chartArea;
+        const datasets = chart.data.datasets;
+        const labels = chart.data.labels;
+        const legendHeight = 20;
+
+        datasets.forEach((dataset, datasetIndex) => {
+            dataset.backgroundColor.forEach((color, colorIndex) => {
+                const x = chartArea.left + (chartArea.right - chartArea.left) / labels.length * (colorIndex + 0.5);
+                const y = chartArea.bottom + legendHeight;
+                const label = labels[colorIndex];
+
+                ctx.save();
+                ctx.fillStyle = color;
+                ctx.fillRect(x - 5, y, 10, 10); // Draw color box
+
+                ctx.fillStyle = '#000';
+                ctx.font = '12px Arial';
+                ctx.textAlign = 'center';
+                ctx.fillText(label, x, y + 15); // Draw label text below the color box
+                ctx.restore();
+            });
+        });
+    }
+};
+
+const ctx = document.getElementById('myChart').getContext('2d');
+const myChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple'],
+        datasets: [{
+            label: '# of Votes',
+            data: [12, 19, 3, 5, 2],
+            borderWidth: 4,
+            backgroundColor: [
+                'rgba(17, 215, 105, 0.4)',
+                'rgba(48, 138, 205, 0.4)',
+                'rgba(218, 131, 0, 0.4)',
+                'rgba(28, 255, 241, 0.4)',
+                'rgba(255, 231, 0, 0.4)',
+            ],
+            borderColor: [
+                'rgba(17, 215, 105, 1)',
+                'rgba(48, 138, 205, 1)',
+                'rgba(218, 131, 0, 1)',
+                'rgba(28, 255, 241, 1)',
+                'rgba(255, 231, 0, 1)',
+            ]
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true,
+                grid: {
+                    display: false  // Ẩn khung kẻ nền
+                },
+                ticks: {
+                    display: false  // Ẩn giá trị trục y
+                }
+            },
+            x: {
+                grid: {
+                    display: false  // Ẩn khung kẻ nền trục x
+                }
+            }
+        },
+        plugins: {
+            legend: {
+                display: false  // Ẩn chú thích mặc định
+            }
+        }
+    },
+    plugins: [topBorderPlugin]
+});
+
+
+$(document).on('click', '.page-link', function(event) {
+    event.preventDefault();
+    var url = $(this).attr('href');
+    fetchJobs(url);
+});
+
+function fetchJobs(url) {
+  $('#loading').css('display','flex');
+  $.ajax({
+    url: url,
+    type: 'GET',
+    dataType: 'json',
+    success: function(data) {
+        $('#jobs__list').html('');
+        data.jobs.forEach(function(job) {
+            var jobHtml = '<div class="jobs__content">' +
+                '<div class="jobs__logo">' +
+                '<img src="' + job.employer.logo + '" alt="job-logo">' +
+                '</div>' +
+                '<div class="jobs__info">' +
+                '<div class="jobs__name">' + job.jobTitle + '</div>' +
+                '<div class="jobs__company" title="' + job.employer.name + '">' + job.employer.name + '</div>' +
+                '<div class="jobs__price">' +
+                '<span>' + job.salary + '</span>' +
+                '<span>' + job.level + '</span>' +
+                '</div>' +
+                '<div class="jobs__deadline">' +
+                '<span>Hạn nộp: ' + job.expiredDay + '</span>' +
+                '<span>Số lượng: ' + job.count + '</span>' +
+                '</div>' +
+                '</div>' +
+                '</div>';
+            $('#jobs__list').append(jobHtml);
+        });
+        $('#pagination__links').html(data.pagination);
+        $('#loading').css('display', 'none');
+    },
+    error: function(xhr) {
+        console.log(xhr.responseText);
+        $('#loading').css('display', 'none');
+    }
+  });
+}
+
+
+
+// Sign in
+
+
+// Redirect login
+$('.redirect-signin').click(function(){
+  $('.modal-login').addClass('show');
+  $('.modal-login').find('.modal-content').addClass('show');
+})
+$('.redirect-signup').click(function(){
+  $('.modal-register').addClass('show');
+  $('.modal-register').find('.modal-content').addClass('show');
+})
+
+$('.modal-close').click(function(){
+  $('.modal-login').removeClass('show');
+  $('.modal-register').removeClass('show');
+  $('.modal-content').removeClass('show');
+})
+
+$('.modal-login').click(function(e){
+    if(e.target === e.currentTarget){
+        $(this).removeClass('show');
+        $(this).find('.modal-content').removeClass('show');
+    }
+})
+$('.modal-register').click(function(e){
+    if(e.target === e.currentTarget){
+        $(this).removeClass('show');
+        $(this).find('.modal-content').removeClass('show');
+    }
+})
+
+
+// Signup account
+
+$(document).ready(function() {
+    $('#login-form').on('submit', function(e) {
+        e.preventDefault();
+
+        var email = $('.login-email').val();
+        var password = $('.login-password').val();
+    
+        var _token = $('input[name="_token"]').val();
+    
+        $.ajax({
+            url: '/dang-nhap',
+            method: 'POST',
+            data:{email:email, password:password, _token:_token},
+            success: function(data) {
+    
+                if(data == 'success') {
+                    location.reload()
+                }else{
+                    console.log(data.message);
+                }
+            },
+            error: function(xhr, status, error) {
+                var errorMessage = xhr.responseJSON ? xhr.responseJSON.message : 'Đăng nhập thất bại!';
+                alert(errorMessage);
+            }
+        });
+    });
+
+
+    $('#register-form').on('submit', function(e) {
+        e.preventDefault();
+
+        var formData = {
+            email: $('.register-email').val(),
+            password1: $('.register-password').val(),
+            password2: $('.confirm-password').val(),
+            name: $('.register-name').val(),
+            phone: $('.register-phone').val(),
+            gender: $('input[name="gender"]:checked').val(),
+            birthday: $('.register-birthday').val(),
+            address: $('.register-address').val(),
+        };
+
+        $.ajax({
+            url: 'http://45.90.220.144:1403/api/v1/auth/register/candidate',
+            type: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(formData),
+            success: function(response) {
+                alert('ok')
+            },
+            error: function(xhr, status, error) {
+                var errorMessage = xhr.responseJSON ? xhr.responseJSON.message : 'Đăng ký thất bại!';
+                alert(errorMessage);
+            }
+        });
+    });
+
+
+});
+
+
